@@ -2,37 +2,36 @@
 
 In this tutorial, our main objective is to learn the basic building blocks of Angular 2 by building a hackernews reader app.
 
-[Demonstrate end product]
+What our end product looks like: https://plnkr.co/edit/Fzmq1G9c211qCR9xloaS?p=preview
 
 - [Getting our online editor ready](#editor)
 - [Hello Angular2](#hello-angular2)
-- [Step by step HackerNews Reader](#hackernews-reader)
+- [Building hackernews reader step by step](#hackernews-reader)
     - [Create our base app frame](#base-frame)
     - [Display mock news list](#mock-data)
-    - [Multiple Components](#multiple-components)
+    - [Multiple components](#multiple-components)
     - [Retrieve actual hackernews data](#retrieve-data)
     - [Create pagination for our hackernews reader (Routing)](#routing)
 - [Side Notes](#side-notes)
 
 <a name="editor"></a>
 ## Getting our online editor ready
-- For simplicity across different OSes, we'll be coding using an online editor, plunker. You guys can find plunker at http://plnkr.co/, or search for plunker at google and click on the first link.
-- Plunker transpile typescript in the browser on the fly, not ideal for production applications, but it is fine for us to explore and learn Angular2 today.
+- For simplicity across different OSes, we'll be coding using an online editor, plunker. You guys can find plunker at http://plnkr.co/.
+- Plunker transpile typescript in the browser on the fly, although it is not ideal for production applications, but it is good enough for us to explore and learn Angular2 today.
 
 
 <a name="hello-angular2"></a>
 ## Hello Angular2
-- Load AngularJS 2.0.x (TS) from the drop down list beside New. (TS stands for TypeScript)
-![Load Angular 2 Template](./img/load-a2-template.png)
-- Now we have a working basic "Hello Angular2" app.
-- Let's take a look at the files that are generated.
+Load AngularJS 2.0.x (TS) from the drop down list beside New. (TS stands for TypeScript)
+![Load Angular 2 Template](./img/load-a2-template.png)  
+Now we have a working basic "Hello Angular2" app. Let's take a look at the files that are generated.
   - index.html
   - config.js
   - app.ts
   - main.ts
 
 <a name="hackernews-reader"></a>
-## Step by step HackerNews Reader
+## Building hackernews reader step by step
 
 <a name="base-frame"></a>
 ### Create our base app frame
@@ -210,7 +209,7 @@ export class App {
 ```
 
 <a name="multiple-components"></a>
-## Multiple Components
+## Multiple components
 Seems like our code has begin to become longer and longer, why not we refactor the code abit.  
 
 Create these 3 new files, `src/news-list.component.ts`, `src/news-list.component.html`, `src/news-item.component.ts`  
