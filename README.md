@@ -2,7 +2,7 @@
 
 In this tutorial, our main objective is to learn the basic building blocks of Angular 2 by building a hackernews reader app.
 
-What our end product looks like: https://plnkr.co/edit/Fzmq1G9c211qCR9xloaS?p=preview
+What our end product looks like: https://plnkr.co/edit/ntu86TQogua6crAKkaN7?p=preview
 
 - [Getting our online editor ready](#editor)
 - [Hello Angular2](#hello-angular2)
@@ -12,7 +12,7 @@ What our end product looks like: https://plnkr.co/edit/Fzmq1G9c211qCR9xloaS?p=pr
     - [Multiple components](#multiple-components)
     - [Retrieve actual hackernews data](#retrieve-data)
     - [Create pagination for our hackernews reader (Routing)](#routing)
-- [Side Notes](#side-notes)
+- [That's all, where to go next](#go-next)
 
 <a name="editor"></a>
 ## Getting our online editor ready
@@ -97,16 +97,6 @@ export class App {
   title = 'Hacker News';
 }
 ```
-Component and decorator
-Decorator 
- - actually a new syntax from typescript, what it does is it tells Angular that this class is a angular2 component.
-Component 
- - A full fledge Angular 2 is actually consist of lots of components where a component can have sub-components in it and sub-components can have sub-sub-components in it.
-A component consists of a selector, which is its label. 
-
-Template, interpolation or 1 way data binding
-The curly curly bracers there is actually called data interpolation or 1 way data binding, what it does is that it will evaluate the expression it contains and output its final value to the view. (can try concat string and change title property)
-
 
 <a name="mock-data"></a>
 ### Display data in our app (mock data)
@@ -142,8 +132,6 @@ template: `
 </ul>
 `,
 ```
-
-Explain *, # and ngFor
 
 Since we already added bootstrap styling in, lets style our title as well
 ```typescript
@@ -210,7 +198,7 @@ export class App {
 
 <a name="multiple-components"></a>
 ## Multiple components
-Seems like our code has begin to become longer and longer, why not we refactor the code abit.  
+Lets try split our components in to multiple components and see how multiple components work together with each other.
 
 Create these 3 new files, `src/news-list.component.ts`, `src/news-list.component.html`, `src/news-item.component.ts`  
 
@@ -303,12 +291,6 @@ export class App {
 }
 ```
 
-
-
-Explain how import work, explain directives, explain @Input
-
-@Input binds the class property to its parent component that supply the data
-
 <a name="retrieve-data"></a>
 ## Retrieve actual hackernews data
 Retrieve from actual server, need to use http ajax
@@ -364,19 +346,13 @@ export class NewsListService {
                      .catch(this._handleError);
   }
 
-  private _handleError (error: Response) {
+  private _handleError (error) {
     // in a real world app, we may send the error to some remote logging infrastructure
     // instead of just logging it to the console
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+    return 'Server error';
   }
 }
 ```
-
-Explain Service concept (explain service.ts naming convention), Injectable  
-Explain that getNewsList take in page number that we will be using to do pagination later  
-Explain promise and http dependency injection  
-
 
 add 2 imports to `src\app.ts`  
 ```typescript
@@ -411,9 +387,6 @@ and modify component decorator to
 })
 ```
 
-explain Provider, HTTP_PROVIDERS
-available at root, child also available
-
 Update `src/news-list.component.ts`
 ```typescript
 import {Component, OnInit} from 'angular2/core';
@@ -443,10 +416,7 @@ export class NewsListComponent implements OnInit {
   getNewsList(page = 1) {
     this._newsListService.getNewsList(page)
                          .then(
-                           newsList => {
-                             console.log(newsList);
-                             this.newsList = newsList;
-                             },
+                           newsList => this.newsList = newsList,
                            error =>  this.errorMessage = <any>error
                           );
   }
@@ -455,7 +425,7 @@ export class NewsListComponent implements OnInit {
 
 <a name="routing"></a>
 ## Create pagination for our hackernews reader (Routing)
-To use angular 2 routing library, in `index.html`, add
+Add angular 2 routing library to our `index.html` (not all app requires routing, hence router library is an optional module library)
 ```html
 <script src="https://code.angularjs.org/2.0.0-beta.8/router.dev.js"></script>
 ```
@@ -517,9 +487,6 @@ import {NewsListComponent} from './news-list.component';
 export class App { }
 ```
 
-Explain new things added @RouteConfig(3 key component), ROUTER_PROVIDERS, ROUTER_DIRECTIVES, <router-outlet>
-
-
 Update `src/news-list.component.ts`
 ```typescript
 import {Component, OnInit} from 'angular2/core';
@@ -564,10 +531,6 @@ export class NewsListComponent implements OnInit {
 }
 ```
 
-Calculate page using actual route parameters, retrieve using RouteParams   
-ROUTER_DIRECTIVES for routerLink  
-
-
 In `src/news-list.component.html`, change `{{i+1}}` to `{{ (30* (page-1)) + i + 1 }}`
 
 and add in a bootstrap pager to navigate between pages
@@ -580,11 +543,9 @@ and add in a bootstrap pager to navigate between pages
 </nav>
 ```
 
-Explain ngClass, routerLink
-
-
-<a name="side-notes"></a>
-## Side Notes
-After you have understood A2 basic concept, Angular 2 cheat sheet very useful to refer syntax
-
-- For those want to setup the development environment locally, can check out official Angular guide at https://angular.io/docs/ts/latest/quickstart.html#!#devenv
+<a name="go-next"></a>
+## That's all, where to go next
+- For further learning typescript, check out http://www.typescriptlang.org/docs/tutorial.html
+- For indepth Angular 2 learning, check out Angular 2 official website, https://angular.io/docs/ts/latest/
+- In case Angular2's syntax are too much to memorize, can always refer to Angular 2's syntax cheat sheet, https://angular.io/docs/ts/latest/cheatsheet.html
+- For those want to setup the development environment locally, check out official Angular guide at https://angular.io/docs/ts/latest/quickstart.html#!#devenv
